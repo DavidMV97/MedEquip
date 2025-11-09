@@ -9,6 +9,7 @@ export interface FieldConfig {
   label: string;
   type: FieldType;
   options?: { label: string; value: string }[]; // Solo para selects
+  placeholder?: string;
   validation?: Record<string, any>;
 }
 
@@ -28,7 +29,6 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit, submitLabel
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md"
     >
       {fields.map((field) => (
         <FormField
@@ -36,13 +36,14 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, onSubmit, submitLabel
           label={field.label}
           type={field.type}
           registration={register(field.name, field.validation)}
+          placeholder={field.placeholder}
           error={errors[field.name]}
         />
       ))}
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        className="w-full bg-sky-700 text-white py-2 rounded-lg hover:bg-sky-800 transition-colors cursor-pointer"
       >
         {submitLabel}
       </button>

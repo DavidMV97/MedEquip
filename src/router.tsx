@@ -3,6 +3,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import Auth from "./views/Auth";
 import Dashboard from "./views/Dashboard";
 import Layout from "./layouts/Layout";
+import LoginForm from "./components/forms/LoginForm";
+import RegisterForm from "./components/forms/RegisterForm";
 
 const router = createBrowserRouter([
      {
@@ -17,7 +19,8 @@ const router = createBrowserRouter([
         path: "/auth",
         element: <AuthLayout />,
         children: [
-            {path: '/auth', element: <Auth />}
+            {path: '/auth/login', element: <LoginForm />},
+            {path: '/auth/register', element: <RegisterForm />}
         ]
     }
 ])
