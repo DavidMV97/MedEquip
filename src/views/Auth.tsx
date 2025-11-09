@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, registerSchema, type LoginSchema, type RegisterSchema } from "../validation/authSchemas";
+import RegisterForm from "../components/forms/RegisterForm";
+import LoginForm from "../components/forms/LoginForm";
 
 export default function Auth() {
   const [view, setView] = useState<"login" | "register">("login");
@@ -47,87 +49,3 @@ export default function Auth() {
   );
 }
 
-/* LOGIN FORM */
-function LoginForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const onSubmit = (data: LoginSchema) => {
-    console.log("Login data:", data);
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-      <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
-        <input
-          {...register("email")}
-          className="w-full p-2 mt-1 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-gray-100"
-        />
-        {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
-      </div>
-
-      <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Contraseña</label>
-        <input
-          type="password"
-          {...register("password")}
-          className="w-full p-2 mt-1 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-gray-100"
-        />
-        {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
-      </div>
-
-      <button type="submit" className="w-full bg-sky-700 text-white py-2 rounded-md hover:bg-sky-800 cursor-pointer">
-        Iniciar Sesión
-      </button>
-    </form>
-  );
-}
-
-/* REGISTER FORM */
-function RegisterForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterSchema>({
-    resolver: zodResolver(registerSchema),
-  });
-
-  const onSubmit = (data: RegisterSchema) => {
-    console.log("Register data:", data);
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-      <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Nombre</label>
-        <input
-          {...register("name")}
-          className="w-full p-2 mt-1 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-gray-100"
-        />
-        {errors.name && <p className="text-red-600 text-sm">{errors.name.message}</p>}
-      </div>
-
-      <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
-        <input
-          {...register("email")}
-          className="w-full p-2 mt-1 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-gray-100"
-        />
-        {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
-      </div>
-
-      <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Contraseña</label>
-        <input
-          type="password"
-          {...register("password")}
-          className="w-full p-2 mt-1 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-gray-100"
-        />
-        {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
-      </div>
-
-      <button type="submit" className="w-full bg-sky-700 text-white py-2 rounded-md hover:bg-sky-800 cursor-pointer">
-        Registrarse
-      </button>
-    </form>
-  );
-}
